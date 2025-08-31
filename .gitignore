@@ -1,0 +1,4 @@
+builddir/
+*.o
+subprojects/**/
+settings.json
