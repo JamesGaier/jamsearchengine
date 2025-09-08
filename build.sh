@@ -1,2 +1,4 @@
 #!/bin/bash
-ninja-build -C builddir
+
+meson builddir
+ninja-build -C builddir install
