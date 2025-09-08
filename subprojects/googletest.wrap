@@ -1,0 +1,9 @@
+[wrap-file]
+directory = googletest-1.17.0
+source_url = https://github.com/google/googletest/archive/refs/tags/v1.17.0.zip
+source_filename = googletest-1.17.0.zip
+source_hash = 40d4ec942217dcc84a9ebe2a68584ada7d4a33a8ee958755763278ea1c5e18ff 
+wrapdb_version = 1.17.0
+
+[provide]
+googletest = googletest_dep
