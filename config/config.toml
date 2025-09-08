@@ -1,0 +1,8 @@
+title = "Web-Crawler config"
+
+[Downloader]
+seed_urls = ["http://odp.org/"]
+
+
+[Spider]
+num_threads = 16

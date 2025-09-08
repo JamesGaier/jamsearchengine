@@ -1,0 +1,7 @@
+
+[Downloader]
+seed_urls = ["http://wikipedia.org/"]
+
+
+[Spider]
+num_threads = 10
