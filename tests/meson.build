@@ -1,6 +1,7 @@
 
 crawler_test_srcs = [
-    'CrawlerConfigTest.cpp'
+    'CrawlerConfigTest.cpp',
+    'PageTest.cpp',
 ]
 
 crawler_test_exe = executable(
