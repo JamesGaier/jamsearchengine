@@ -10,6 +10,7 @@ jam_web_crawler_include_dir = include_directories('include')
 jam_web_crawler_src = [
     'src/PageDownloader.cpp',
     'src/CrawlerConfig.cpp',
+    'src/Page.cpp',
 ]
 
 jam_web_crawler_src_main = [
