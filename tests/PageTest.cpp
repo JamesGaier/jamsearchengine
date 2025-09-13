@@ -1,10 +1,10 @@
 #include <gtest/gtest.h>
 
-#include "Page.hpp"
+#include "HtmlParser.hpp"
 
 namespace {
 
-class PageTest : public testing::Test
+class ParserTest : public testing::Test
 {
 protected:
 
@@ -20,7 +20,7 @@ protected:
             </div>
         </html>
     )";
-    const std::vector<std::string> expectedLinks = {
+    const std::unordered_set<std::string> expectedLinks = {
         "https://lamb.com",
         "https://ram.com",
         "https://bam.com"
@@ -28,9 +28,9 @@ protected:
 };
 
 
-TEST_F(PageTest, TestParsingLinks)
+TEST_F(ParserTest, TestParsingLinks)
 {
-    auto result = jam_crawler::Page::parse(page);
+    auto result = jam_crawler::HtmlParser::parse(page);
     EXPECT_EQ(result, expectedLinks);
 }
 
