@@ -39,12 +39,7 @@ Page PageDownloader::requestPage(const std::string &url)
     curl_easy_setopt(m_curl, CURLOPT_TIMEOUT, 10L);  // 10-second timeout
     
     CURLcode code = curl_easy_perform(m_curl);
-    if (code != CURLE_OK) {
-        std::cerr << "CURL error (" << code << "): " 
-            << curl_easy_strerror(code) << " - " << url << std::endl;
-    }
-
-    return {code, response};
+    return Page(response, code); 
 }
 
 }

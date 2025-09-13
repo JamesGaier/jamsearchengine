@@ -3,15 +3,11 @@
 #include <string>
 #include <curl/curl.h>
 
+#include "Page.hpp"
+
 
 namespace jam_crawler
 {
-
-struct Page 
-{
-    CURLcode code;
-    std::string pageText;
-};
 
 // Downloads a page with curl
 class PageDownloader
