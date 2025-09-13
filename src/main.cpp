@@ -1,8 +1,29 @@
-#include <fmt/core.h>
-#include <fmt/ranges.h>
+#include "PageDownloader.hpp"
+#include "CrawlerConfig.hpp"
+#include <iostream>
 
-#include <vector>
+constexpr static auto ARG_COUNT = 2;
 
-int main() {
-    fmt::print("{}\n", std::vector<int>{1, 2, 3, 4, 5});
+
+int main(int argc, char *argv[])
+{
+    if (argc != ARG_COUNT)
+    {
+        std::cerr << "Program uses one argument: ./jam-web-crawler [config-file-path]\n";
+        return 1;
+    }
+
+    try
+    {
+        jam_crawler::CrawlerConfig config(argv[1]);
+
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+        return 1;
+    }
+    
+
+    return 0;
 }
