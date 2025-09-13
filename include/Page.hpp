@@ -1,23 +1,19 @@
 #pragma once
+
+#include <string>
 #include <curl/curl.h>
-#include <string> 
-#include <vector>
-#include "gumbo.h"
+#include <unordered_set>
 
 namespace jam_crawler
 {
 
-class Page 
+struct Page
 {
-public:
+    std::unordered_set<std::string> urls;
+    CURLcode code;
 
-static std::vector<std::string> parse(const std::string &rawPage);
-
-
-private:
-    static void search_for_links(GumboNode* node, std::vector<std::string> &urls);
-
-    static std::vector<std::string> filter(const std::vector<std::string> &urls);
+    Page() = default;
+    Page(const std::string &rawPage, CURLcode code);
 };
 
 }
