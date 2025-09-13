@@ -4,6 +4,7 @@
 
 #include <string>
 #include <unordered_set>
+#include <random>
 
 namespace jam_crawler
 {
@@ -19,13 +20,15 @@ public:
 
     std::unordered_set<std::string> keywordSearch(const std::string &keyword);
 
-    bool containsLink(const std::string &keyword);
+    bool containsLink(const std::string &queryLink);
 
 private:
-
     SQLite::Database m_db;
+    const std::string m_tableName;
+    int m_curId;
 
-    void createTable(const std::string &tableName);
+    void createTable();
+
 };
 
 }

@@ -4,6 +4,8 @@
 #include <curl/curl.h>
 #include <unordered_set>
 
+#include "SQLiteHandler.hpp"
+
 namespace jam_crawler
 {
 
@@ -13,7 +15,7 @@ struct Page
     CURLcode code;
 
     Page() = default;
-    Page(const std::string &rawPage, CURLcode code);
+    Page(const std::string &rawPage, CURLcode code, SQLiteHandler &handler);
 };
 
 }

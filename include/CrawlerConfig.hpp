@@ -16,9 +16,11 @@ struct CrawlerConfig
     const std::string SPIDER_NODE = "Spider";
     const std::string SEED_URL_NODE = "seed_urls";
     const std::string NUM_THREADS_NODE = "num_threads";
+    const std::string DELAY_NODE = "query_delay";
     toml::table crawlerConfig;
     std::vector<std::string> seedURLs;
     int64_t numThreads{};
+    int64_t queryDelay{};
 
     ~CrawlerConfig() = default;
 

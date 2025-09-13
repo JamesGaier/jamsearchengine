@@ -24,7 +24,7 @@ public:
 
     // for now this is going to be a string.  If I need to do more complex stuff It can get its own object
     // download a page from the internet
-    Page requestPage(const std::string &url);
+    Page requestPage(const std::string &url, SQLiteHandler &handler);
 
 private:
     CURL* m_curl;

@@ -23,14 +23,15 @@ void HtmlParser::search_for_links(GumboNode* node, std::unordered_set<std::strin
     }
 }
 
-std::unordered_set<std::string> HtmlParser::filter(const std::unordered_set<std::string> &urls)
+std::unordered_set<std::string> HtmlParser::filter(const std::unordered_set<std::string> &urls, SQLiteHandler &handler)
 {
     std::unordered_set<std::string> answer;
     for (const auto &link : urls)
     {
         if ((link.rfind("http://", 0) != std::string::npos 
         || link.rfind("https://", 0) != std::string::npos)
-        && link.find(" ") == std::string::npos) 
+        && link.find(" ") == std::string::npos
+        && !handler.containsLink(link)) 
         {
             answer.insert(link);
         }
@@ -39,14 +40,14 @@ std::unordered_set<std::string> HtmlParser::filter(const std::unordered_set<std:
     return answer;
 }
 
-std::unordered_set<std::string> HtmlParser::parse(const std::string &rawHtmlParser)
+std::unordered_set<std::string> HtmlParser::parse(const std::string &rawHtmlParser, SQLiteHandler &handler)
 {
     auto *node = gumbo_parse(rawHtmlParser.c_str());
     std::unordered_set<std::string> urls;
     search_for_links(node->root, urls);
     gumbo_destroy_output(&kGumboDefaultOptions, node);
 
-    urls = filter(urls);
+    urls = filter(urls, handler);
 
     return urls;
 }

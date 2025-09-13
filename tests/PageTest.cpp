@@ -7,7 +7,7 @@ namespace {
 class ParserTest : public testing::Test
 {
 protected:
-
+    constexpr static auto TABLE_NAME = "urls";
     const std::string page = R"(
         <html>
             <div>
@@ -30,7 +30,8 @@ protected:
 
 TEST_F(ParserTest, TestParsingLinks)
 {
-    auto result = jam_crawler::HtmlParser::parse(page);
+    jam_crawler::SQLiteHandler handler(TABLE_NAME);
+    auto result = jam_crawler::HtmlParser::parse(page, handler);
     EXPECT_EQ(result, expectedLinks);
 }
 

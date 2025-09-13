@@ -2,6 +2,7 @@ title = "Web-Crawler config"
 
 [Downloader]
 seed_urls = ["http://odp.org/"]
+query_delay = 5000 # milliseconds
 
 
 [Spider]

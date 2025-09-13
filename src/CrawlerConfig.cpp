@@ -34,6 +34,7 @@ CrawlerConfig::CrawlerConfig(const std::string &configPath)
     auto downloaderNode = crawlerConfig[DOWNLOADER_NODE];
     auto seedUrlArray = readNode<toml::array>(downloaderNode, SEED_URL_NODE);
     copyArray(seedURLs, seedUrlArray);
+    queryDelay = readNode<int64_t>(downloaderNode, DELAY_NODE);
 
     auto spiderNode = crawlerConfig[SPIDER_NODE];
     auto numThreadsNode = readNode<int64_t>(spiderNode, NUM_THREADS_NODE);

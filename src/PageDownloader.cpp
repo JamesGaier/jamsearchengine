@@ -26,7 +26,7 @@ size_t PageDownloader::writeCallback(char* data, size_t size, size_t nmemb, void
     return total_size;
 }
 
-Page PageDownloader::requestPage(const std::string &url)
+Page PageDownloader::requestPage(const std::string &url, SQLiteHandler &handler)
 {
     std::string response;
     curl_easy_setopt(m_curl, CURLOPT_URL, url.c_str());
@@ -39,7 +39,7 @@ Page PageDownloader::requestPage(const std::string &url)
     curl_easy_setopt(m_curl, CURLOPT_TIMEOUT, 10L);  // 10-second timeout
     
     CURLcode code = curl_easy_perform(m_curl);
-    return Page(response, code); 
+    return Page(response, code, handler); 
 }
 
 }

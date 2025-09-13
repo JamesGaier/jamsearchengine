@@ -36,6 +36,7 @@ gtestmain_dep = googletest_sub.dependency('gtest_main')
 gtest_dep = googletest_sub.dependency('gtest')
 toml_dep = dependency('tomlplusplus')
 cxxopts_dep = dependency('cxxopts')
+boost_dep = dependency('boost')
 
 
 executable(
@@ -59,6 +60,7 @@ jam_crawler_deps = [
     sqlitecpp_dep, 
     toml_dep,
     cxxopts_dep, 
+    boost_dep,
 ]
 
 jam_crawler_lib = library(
