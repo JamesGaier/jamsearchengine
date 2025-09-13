@@ -10,6 +10,9 @@ jam_web_crawler_include_dir = include_directories('include')
 jam_web_crawler_src = [
     'src/PageDownloader.cpp',
     'src/CrawlerConfig.cpp',
+    'src/HtmlParser.cpp',
+    'src/SQLiteHandler.cpp',
+    'src/Spider.cpp',
     'src/Page.cpp',
 ]
 
@@ -32,6 +35,7 @@ googletest_sub = cmake.subproject('googletest')
 gtestmain_dep = googletest_sub.dependency('gtest_main')
 gtest_dep = googletest_sub.dependency('gtest')
 toml_dep = dependency('tomlplusplus')
+cxxopts_dep = dependency('cxxopts')
 
 
 executable(
@@ -53,7 +57,8 @@ jam_crawler_deps = [
     format_dep, 
     gumbo_dep, 
     sqlitecpp_dep, 
-    toml_dep, 
+    toml_dep,
+    cxxopts_dep, 
 ]
 
 jam_crawler_lib = library(
