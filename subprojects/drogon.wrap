@@ -1,0 +1,7 @@
+[wrap-git]
+url = https://github.com/drogonframework/drogon
+revision = v1.9.11
+clone-recursive = true
+
+[provide]
+drogon = drogon_dep
