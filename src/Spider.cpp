@@ -21,9 +21,14 @@ void Spider::crawl(SQLiteHandler &handler)
     {
         PageDownloader downloader;
         auto parentURL = m_linksQueue.front();
-        std::cout << "Crawling: " <<  parentURL << std::endl; 
-        handler.insertLink(parentURL);
         m_linksQueue.pop_front();
+        std::cout << "Crawling: " <<  parentURL << std::endl; 
+        bool success = handler.insertLink(parentURL);
+        if (!success)
+        {
+            std::cerr << "Error! Failed to insert " << parentURL << " into database ";
+        }
+
         Page curPage = downloader.requestPage(parentURL, handler);
 
         if (curPage.code != CURLE_OK) {

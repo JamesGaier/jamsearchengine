@@ -1,7 +1,14 @@
 
 [Downloader]
 seed_urls = ["http://wikipedia.org/"]
+query_delay = 5000
 
 
 [Spider]
 num_threads = 10
+
+[Database]
+db_name = "links"
+table_name = "urls"
+ids_row_name = "id"
+urls_row_name = "url"

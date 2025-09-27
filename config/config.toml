@@ -4,6 +4,11 @@ title = "Web-Crawler config"
 seed_urls = ["http://odp.org/"]
 query_delay = 5000 # milliseconds
 
-
 [Spider]
-num_threads = 16
+num_threads = 1
+
+[Database]
+db_name = "links"
+table_name = "urls"
+ids_row_name = "id"
+urls_row_name = "url"

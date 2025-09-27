@@ -5,8 +5,7 @@
 #include <csignal>
 #include <functional>
 
-constexpr static auto ARG_COUNT = 2;
-constexpr static auto TABLE_NAME = "urls";
+constexpr static auto ARG_COUNT = 4;
 
 
 void singalHandler(int sig)
@@ -28,7 +27,12 @@ int main(int argc, char *argv[])
     try
     {
         jam_crawler::CrawlerConfig config(argv[1]);
-        jam_crawler::SQLiteHandler handler(TABLE_NAME);
+        jam_crawler::SQLiteHandler handler(
+            config.dbName, 
+            config.tableName, 
+            config.idsRowName,
+            config.urlsRowName
+        );
         jam_crawler::Spider spider(config.seedURLs[0], config.queryDelay);
         signal(SIGINT, singalHandler);
         spider.crawl(handler);

@@ -16,6 +16,7 @@ protected:
     const std::vector<std::string> EXPECTED_COPY_OUTPUT = {
         "1", "2"
     };
+    constexpr static int64_t EXPECTED_QUERY_DELAY = 5000;
     constexpr static size_t EXPECTED_NUM_THREADS = 10;
     CrawlerConfigTest()
     : config(CONFIG_PATH)
@@ -32,8 +33,9 @@ protected:
 
 TEST_F(CrawlerConfigTest, ReadTOML)
 {
-    EXPECT_TRUE(config.seedURLs == EXPECTED_SEED_URLS);
+    EXPECT_EQ(config.seedURLs, EXPECTED_SEED_URLS);
     EXPECT_EQ(config.numThreads, EXPECTED_NUM_THREADS);
+    EXPECT_EQ(config.queryDelay, EXPECTED_QUERY_DELAY);
 
     std::vector<std::string> words;
     toml::array arr = toml::array{ "1", "2" };
