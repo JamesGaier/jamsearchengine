@@ -10,3 +10,7 @@
 ## Process
 1. Use the project as a template in GitHub
 2. Build the project using `./build.sh`
+
+# Attribution
+# Credit goes to hardikk65 for the webcrawling logic.  I took the code he wrote and simplified it to only using one thread
+# because the web server I am hosting on only uses one thread. I also swapped out regexing for html parsing and added some other features.
