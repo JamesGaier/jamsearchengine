@@ -1,5 +1,9 @@
 builddir/
 *.o
 subprojects/**/
+!subprojects/**/packagefiles
+!subprojects/**/packagefiles/**/
 settings.json
 *.db*
+web/WebCrawlerBackend/build/*
+uploads/
