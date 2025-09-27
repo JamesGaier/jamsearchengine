@@ -14,20 +14,31 @@ class SQLiteHandler
 {
 public:
 
-    SQLiteHandler(const std::string &tableName);
+    SQLiteHandler(
+        const std::string &dbName, 
+        const std::string &tableName,
+        const std::string &idsRowName,
+        const std::string &urlsRowName
+    );
 
-    void insertLink(const std::string &url);
+    [[nodiscard]] bool insertLink(const std::string &url);
 
-    std::unordered_set<std::string> keywordSearch(const std::string &keyword);
+    void removeLink(const std::string &url);
 
-    bool containsLink(const std::string &queryLink);
+    [[nodiscard]] std::unordered_set<std::string> keywordSearch(const std::string &keyword);
+
+    [[nodiscard]] bool containsLink(const std::string &queryLink);
 
 private:
     SQLite::Database m_db;
     const std::string m_tableName;
-    int m_curId;
+    const std::string m_idsRowName;
+    const std::string m_urlsRowName;
+    uint64_t m_curId;
 
-    void createTable();
+    [[nodiscard]] bool createTable();
+
+    [[nodiscard]] uint64_t getMaxId();
 
 };
 

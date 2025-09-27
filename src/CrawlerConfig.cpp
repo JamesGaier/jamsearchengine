@@ -37,8 +37,13 @@ CrawlerConfig::CrawlerConfig(const std::string &configPath)
     queryDelay = readNode<int64_t>(downloaderNode, DELAY_NODE);
 
     auto spiderNode = crawlerConfig[SPIDER_NODE];
-    auto numThreadsNode = readNode<int64_t>(spiderNode, NUM_THREADS_NODE);
-    numThreads = numThreadsNode;
+    numThreads = readNode<int64_t>(spiderNode, NUM_THREADS_NODE);
+
+    auto dbNode = crawlerConfig[CRAWLER_NODE];
+    dbName = readNode<std::string>(dbNode, DB_NAME_NODE);
+    tableName = readNode<std::string>(dbNode, TABLE_NAME_NODE);
+    idsRowName = readNode<std::string>(dbNode, IDS_ROW_NAME_NODE);
+    urlsRowName = readNode<std::string>(dbNode, URLS_ROW_NAME_NODE);
 }
 
 }
