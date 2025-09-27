@@ -2,6 +2,7 @@
 crawler_test_srcs = [
     'CrawlerConfigTest.cpp',
     'PageTest.cpp',
+    'SQLiteHandlerTest.cpp',
 ]
 
 crawler_test_exe = executable(

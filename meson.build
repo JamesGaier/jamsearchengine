@@ -5,6 +5,8 @@ project(
     default_options: ['cpp_std=c++17', 'werror=true']
 )
 
+cpp = meson.get_compiler('cpp')
+
 jam_web_crawler_include_dir = include_directories('include')
 
 jam_web_crawler_src = [
@@ -37,7 +39,7 @@ gtest_dep = googletest_sub.dependency('gtest')
 toml_dep = dependency('tomlplusplus')
 cxxopts_dep = dependency('cxxopts')
 boost_dep = dependency('boost')
-
+jsoncpp_dep = dependency('jsoncpp')
 
 executable(
     'jam-web-crawler-prototype',
