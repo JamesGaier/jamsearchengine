@@ -16,6 +16,7 @@ jam_web_crawler_src = [
     'src/SQLiteHandler.cpp',
     'src/Spider.cpp',
     'src/Page.cpp',
+    'src/Logger.cpp',
 ]
 
 jam_web_crawler_src_main = [
@@ -40,6 +41,7 @@ toml_dep = dependency('tomlplusplus')
 cxxopts_dep = dependency('cxxopts')
 boost_dep = dependency('boost')
 jsoncpp_dep = dependency('jsoncpp')
+spdlog_dep = dependency('spdlog')
 
 executable(
     'jam-web-crawler-prototype',
