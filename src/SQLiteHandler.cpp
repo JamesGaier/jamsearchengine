@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+#include "Logger.hpp"
 
 namespace jam_crawler
 {
@@ -21,7 +22,7 @@ SQLiteHandler::SQLiteHandler(
     auto success = createTable();
     if (!success)
     {
-        std::cout << "Failed to create table " << m_tableName << std::endl;
+        LOG_ERROR("Failed to create table %s", m_tableName.c_str());
     }
 
     // if the table already exists we want set the id to the largest id we have so far
@@ -42,13 +43,12 @@ uint64_t SQLiteHandler::getMaxId()
             maxId = std::max(maxId, query.getColumn(0).getInt64());
         }
 
-        std::cout << "MAXID IS: " << maxId << std::endl;
         return maxId; 
     }
     catch(const std::exception& ex)
     {
-        std::cerr << "Failed to get max id from db" << std::endl;
-        std::cerr << ex.what() << std::endl;
+        LOG_ERROR("Failed to get max id from db");
+        LOG_ERROR("%s", ex.what());
         return 0;
     }
     
@@ -58,17 +58,27 @@ bool SQLiteHandler::insertLink(const std::string &url)
 {
     try
     {
+        if (containsLink(url))
+        {
+            LOG_ERROR("DB already contains link...");
+            return false;
+        }
+
         SQLite::Transaction transaction(m_db);
         std::stringstream query; 
         query << "INSERT INTO " << m_tableName << " VALUES (";
         query << std::to_string(m_curId++) << ",\"" << url << "\")";
+
+        // check that the link is not already in the db first
+
         m_db.exec(query.str());
         transaction.commit();
         return true;
     }
     catch (const std::exception &ex)
     {
-        std::cerr << "Error failed to insert " << url << " into " << m_tableName << std::endl;
+        LOG_ERROR("Error is: %s", ex.what());
+        LOG_ERROR("Error failed to insert %s into %s", url.c_str(), m_tableName.c_str());
         return false;
     }
 }
@@ -85,7 +95,8 @@ void SQLiteHandler::removeLink(const std::string &url)
     }
     catch (const std::exception &ex)
     {
-        std::cerr << "Error failed to remove link " << url << " from " << m_tableName << std::endl;
+        LOG_ERROR("Error failed to remove link %s from %s", url.c_str(), m_tableName.c_str());
+        LOG_ERROR("Error: %s", ex.what());
     }
 }
 
@@ -108,7 +119,8 @@ std::unordered_set<std::string> SQLiteHandler::keywordSearch(const std::string &
     }
     catch (const std::exception &ex)
     {
-        std::cerr << "Error failed to get links from keyword " << keyword << " from " << m_tableName << std::endl;
+        LOG_ERROR("Error failed to get links from keyword %s from %s", keyword.c_str(), m_tableName.c_str());
+        LOG_ERROR("Error: %s", ex.what());
         return {};
     }
 }
@@ -135,7 +147,8 @@ bool SQLiteHandler::containsLink(const std::string &queryLink)
     }
     catch (const std::exception &ex)
     {
-        std::cerr << "Error failed to check if link " << queryLink << " is contained in " << m_tableName << std::endl;
+        LOG_ERROR("Error failed to check if link  %s is contained in %s", queryLink.c_str(), m_tableName.c_str());
+        LOG_ERROR("Error: %s", ex.what());
         return false;
     }
 }
@@ -154,7 +167,8 @@ bool SQLiteHandler::createTable()
     }
     catch (const std::exception &ex)
     {
-        std::cerr << "Error failed to create table " << m_tableName << std::endl;
+        LOG_ERROR("Error failed to create table %s", m_tableName.c_str());
+        LOG_ERROR("Error: %s", ex.what());
         return false;
     }
 }

@@ -1,6 +1,5 @@
 #include "PageDownloader.hpp"
-
-#include <iostream>
+#include "Logger.hpp"
 
 namespace jam_crawler
 {
@@ -39,6 +38,8 @@ Page PageDownloader::requestPage(const std::string &url, SQLiteHandler &handler)
     curl_easy_setopt(m_curl, CURLOPT_TIMEOUT, 10L);  // 10-second timeout
     
     CURLcode code = curl_easy_perform(m_curl);
+    LOG_DEBUG("Page Downloaded");
+    LOG_DEBUG("Page %s", response.c_str());
     return Page(response, code, handler); 
 }
 

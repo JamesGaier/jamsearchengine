@@ -5,6 +5,8 @@
 #include <chrono>
 #include <thread>
 
+#include "Logger.hpp"
+
 namespace jam_crawler
 {
 
@@ -20,20 +22,25 @@ void Spider::crawl(SQLiteHandler &handler)
     while (m_running)
     {
         PageDownloader downloader;
+        if (m_linksQueue.empty())
+        {
+            LOG_ERROR("Links queue is empty exiting...");
+            break;
+        }
+
         auto parentURL = m_linksQueue.front();
         m_linksQueue.pop_front();
-        std::cout << "Crawling: " <<  parentURL << std::endl; 
+        LOG_INFO("Crawling: %s", parentURL.c_str());
         bool success = handler.insertLink(parentURL);
         if (!success)
         {
-            std::cerr << "Error! Failed to insert " << parentURL << " into database ";
+            LOG_ERROR("Error! Failed to insert %s into database", parentURL.c_str());
         }
 
         Page curPage = downloader.requestPage(parentURL, handler);
 
         if (curPage.code != CURLE_OK) {
-            std::cerr << "CURL error (" << curPage.code << "): " 
-                << curl_easy_strerror(curPage.code) << " - " << parentURL << std::endl;
+            LOG_ERROR("CURL error (%d): %s - %s", curPage.code, curl_easy_strerror(curPage.code), parentURL.c_str());
             continue;
         }
 
