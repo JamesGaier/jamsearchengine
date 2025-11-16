@@ -10,6 +10,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Libertinus+Keyboard&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="style.css">
+        <script src="front-serv.js" ></script>
     </head>
 
     <body>
@@ -21,7 +22,18 @@
                     type="text"
                     id="search-bar"
                     name="search-bar"/>
-                <button class="jam-btn roboto-med" style="margin-top: 15px">Jam Search</button>
+                <button 
+                    class="jam-btn roboto-med" 
+                    style="margin-top: 15px" 
+                    id="search-btn" 
+                    onclick="handleSearchResults()"
+                    >Jam Search</button>
+            </div>
+            <h2 class="flex">Search Results</h2>
+            <div class="flex">
+                <ul class="search-style" id="search-results">
+                    <!-- Dynamic page data goes here -->
+                </ul>
             </div>
         </main>
     </body>
