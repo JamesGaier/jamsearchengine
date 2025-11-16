@@ -1,0 +1,17 @@
+version: '1'
+services:
+  web-server:
+    image: localhost/jam/webserver:v0.1
+    ports:
+      - "3030:5555"
+    volumes:
+      - db-share:/app/data
+
+  web-crawler:
+    image: localhost/jam/webcrawler:v0.1
+    ports:
+      - "5000:80"
+    volumes:
+      - db-share:/app/data
+volumes:
+  db-share:
