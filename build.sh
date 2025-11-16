@@ -2,7 +2,7 @@
 
 # gets a newer version of cmake than default version available
 sudo pip3 install cmake
-sudo dnf install boost, boost-devel, uuid-devel, doxygen, jsoncpp-devel, yaml-cpp-devl, yaml-cpp
+sudo dnf install boost, boost-devel, uuid-devel, doxygen, jsoncpp-devel, yaml-cpp-devl, yaml-cpp, python3-flask-cors
 meson builddir
 ninja-build -C builddir install
 
@@ -14,7 +14,14 @@ if [ "$1" = "--build-drogon" ]; then
     ./build_drogon.sh
 fi
 
+# puts web-crawler binary in crawler-deps folder
+if [ "$2" = "--build-web-crawler" ]; then
+    echo "Building Web Crawler"
+    ./docker/docker.sh
+fi
+
 # build drogon webserver stuff
 cd web/WebCrawlerBackend/build
 cmake ..
 make
+cd -
