@@ -7,3 +7,10 @@ settings.json
 *.db*
 web/WebCrawlerBackend/build/*
 uploads/
+prototype.cpp
+.vscode
+docker/crawler-deps
+docker/images
+logs/
+*.tar.gz
+*.pyc
