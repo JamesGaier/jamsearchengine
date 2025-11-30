@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Jam Web Search">
+        <meta name="keywords" content="HTML, CSS, JavaScript">
+        <meta name="author" content="James G">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Libertinus+Keyboard&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    </head>
+
+    <body>
+        <main>
+            <div class="title">
+                <!-- <div class="jam"></div> -->
+                <img src="{{ url_for('static', filename='jam.jpg') }}" class="jam"/>
+                <h1 class="libertinus-keyboard-regular">Jam!</h1>
+                <form action="{{ url_for('search') }}" method="post" class="flex-form">
+                    <input
+                        type="text"
+                        id="search-bar"
+                        name="search-bar"/>
+                    <input 
+                        class="jam-btn roboto-med" 
+                        style="margin-top: 40px" 
+                        id="search-btn" 
+                        type="submit"
+                        value="Jam Search"
+                        />
+                </form>
+            </div>
+            <h2 class="flex">Search Results</h2>
+            <div class="flex">
+                <ul class="search-style" id="search-results">
+                    <!-- Dynamic page data goes here -->
+                    {% if 'Search empty' in results or 'No search results found' in results %}
+                        <li>{{ results[0] }}</li>
+                     {% else %}
+                        {% for result in results %}
+                            <li><a href="{{ result }}">{{ result }}</a></li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
+        </main>
+    </body>
+</html>

@@ -19,9 +19,3 @@ if [ "$2" = "--build-web-crawler" ]; then
     echo "Building Web Crawler"
     ./docker/docker.sh
 fi
-
-# build drogon webserver stuff
-cd web/WebCrawlerBackend/build
-cmake ..
-make
-cd -

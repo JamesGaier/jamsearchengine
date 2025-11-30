@@ -38,6 +38,11 @@ main {
 }
 
 .jam {
+    background-image: url('jam.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    object-fit: scale-down;
+    background-size: 100px;
     width: 100px;
     height: 105px;
     font-family: "Roboto", sans-serif;
@@ -68,17 +73,16 @@ main {
     margin-top: 5vh;
 }
 
-.search-style {
-    list-style: none;
-    max-width: 500px;
-}
-
 .flex-form {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+.search-style {
+    list-style: none;
+    max-width: 500px;
+}
 .search-link {
     padding: 1rem 0;
 }

@@ -3,7 +3,7 @@ services:
   web-server:
     image: localhost/jam/webserver:v0.1
     ports:
-      - "3030:5555"
+      - "5555:5555"
     volumes:
       - db-share:/app/data
 

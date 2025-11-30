@@ -21,8 +21,14 @@ DEPLOY_DIR=/opt/web
 # For security reasons I only put the hostname here
 SERVER_HOSTNAME=web-crawler
 
+# copies images folder to web
+cp -r docker/images web/
+
 # compress the web directory into a tarball file
 tar -czvf $SOURCE_FILE $WEB_DIR
 
 # push the data to the server
 rsync $SOURCE_FILE $SERVER_HOSTNAME:$DEPLOY_DIR
+
+# remove junk folder
+rm -rf web/images

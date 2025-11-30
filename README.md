@@ -10,6 +10,8 @@
 ## Process
 1. Use the project as a template in GitHub
 2. Build the project using `./build.sh`
+3. From root run `podman-compose -f docker/compose.yml up -d`
+4. Deploy to the server with any changes `./deploy.sh`
 
 # Attribution
 Credit goes to hardikk65 for the webcrawling logic.  I took the code he wrote and simplified it to only using one thread

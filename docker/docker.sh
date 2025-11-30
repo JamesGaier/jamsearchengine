@@ -4,12 +4,16 @@
 # RUNNING THIS SCRIPT FROM ANYWHERE ELSE WILL NOT WORK BECAUSE OF RELATIVE PATHS
 
 # remove old containers
+podman stop --all
+podman system prune --all -f
 podman rmi --force $(podman images -aq)
+rm -rf docker/images/*
 
 # get dependencies
 mkdir -p docker/crawler-deps
-mkdir -p docker/web-server-deps
 mkdir -p docker/images
+cp docker/compose.yml docker/images
+
 cp \
     builddir/libjam-web-crawler-lib.so \
     builddir/subprojects/tomlplusplus-3.4.0/src/libtomlplusplus.so.3 \
@@ -29,24 +33,6 @@ cp \
     /lib64/libzstd.so.1 \
     docker/crawler-deps/ 
 
-
-cp \
-    web/WebCrawlerBackend/build/WebCrawlerBackend \
-    web/WebCrawlerBackend/config.yaml \
-    builddir/subprojects/tomlplusplus-3.4.0/src/libtomlplusplus.so.3 \
-    /lib64/libssl.so.3 \
-    /lib64/libcrypto.so.3 \
-    /usr/local/lib64/libjsoncpp.so.26 \
-    /lib64/libyaml-cpp.so.0.8 \
-    /lib64/libossp-uuid.so.16 \
-    /lib64/libsqlite3.so.0 \
-    /lib64/libz.so.1 \
-    /lib64/libstdc++.so.6 \
-    /lib64/libm.so.6 \
-    /lib64/libgcc_s.so.1 \
-    /lib64/libc.so.6 \
-    /lib64/ld-linux-x86-64.so.2 \
-    docker/web-server-deps
 
 # build docker image
 IMAGE_NAME_CRAWLER="jam/webcrawler:v0.1"
